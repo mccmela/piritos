@@ -36,7 +36,7 @@ if enableSense:
 
 # Mote is for the Pimoroni Mote stick LEDs.
 # Set enableLights to False or replace this code and the code in the lights fuction with your own LED system
-enableLights = True
+enableLights = False
 if enableLights:
     try:
         from mote import Mote
