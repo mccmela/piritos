@@ -29,7 +29,7 @@ if enableWeather:
 
 # Sense hat is for the sensor data normally on the pi running the server.
 # Set enableSense to False to disable the featue
-enableSense = True
+enableSense = False
 if enableSense:
     from sense_hat import SenseHat
     sense = SenseHat()
