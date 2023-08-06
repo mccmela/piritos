@@ -193,8 +193,8 @@ def getbbcheadline():
 # If enabled you can get the current weather report from open-meteo.com sent to the all connected clients normally this is set to every 30 mins to prevent spam
 def getweatherdata():
     # Set your Longitude and Latitude for your location (default is for Berlin Germany)
-    longitude = 13.55
-    latitude = 52.41
+    longitude = -92.11
+    latitude = 34.86
     url = f'https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true'
     response = requests.get(url)
     data = response.json()
@@ -264,7 +264,7 @@ def getpimeteostats():
                 data = data.decode('utf-8')
                 temp,humid,press = data.split(",")
                 sensordata = {"Temperature":round(temp, 2), "Humidity":round(humid, 2), "Pressure":round(press, 2)}
-                socketio.emit('updateSensorData', sensordata, broadcast=True)
+                socketio.emit('updateSensorData', sensordata)
         except socket.timeout:
             continue # makes the shutting down faster because we don't have to wait 2 minutes
 
