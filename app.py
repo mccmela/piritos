@@ -297,4 +297,4 @@ if __name__ == "__main__":
     # Start all jobs
     sched.start()
     # Run server on host pi's IP and hostname so it can be accessed on the local network
-    socketio.run(app, host='192.168.0.40', port=22)
+    socketio.run(app, host='192.168.0.40', port=5000)
