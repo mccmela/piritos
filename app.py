@@ -109,7 +109,7 @@ def fetchStatus(data):
     print(msg)
     emit('remoteLogMsg', remoteLogMsg)
     if enableSense or enablePimeteo:
-        emit('updateSensorData', sensordata, broadcast=True)
+        emit('updateSensorData', sensordata)
     if enableWeather:
         sendmessage(weather_message, True, True)
     print(serverstatus)
@@ -121,7 +121,7 @@ def setStatus(data):
     clientstatus = fixjson(data)
     global serverstatus
     serverstatus = serverstatus | clientstatus
-    emit('updateState', serverstatus, broadcast=True)
+    emit('updateState', serverstatus)
 
 # Default handler, if no path is given
 @app.route("/")
@@ -167,7 +167,7 @@ def getsensordata():
     global sensordata
     sensordata = {"Temperature":round(sense.temp, 2) , "Humidity":round(sense.humidity, 2) , "Pressure":round(sense.pressure, 2)}
     print(f"Sensorhat data sent to clients: {sensordata}")
-    socketio.emit('updateSensorData', sensordata, broadcast=True)
+    socketio.emit('updateSensorData', sensordata)
 
 # If you have a pico w this little gem receives the data from the pico temp sensor and formats it and pushes it to all clients
 def getpicowudp():
@@ -245,7 +245,7 @@ def sendweatherdata():
 # Standard send message to log function
 def sendmessage(msg, showTimePrefix=False, playSound=False):
     data = {"message": msg, "showTimePrefix": showTimePrefix, "playSound": playSound}
-    socketio.emit('remoteLogMsg', data, broadcast=True)
+    socketio.emit('remoteLogMsg', data)
     print(f"Message sent to clients: {msg}")
 
 # If you have a PiMeteo this little gem receives the data from the sensors and formats it and pushes it to all clients
